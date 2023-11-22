@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import argparse
+from pk import create_package, read_package, upgrade_package, delete_package, install_package
+
+def parse_arguments():
+	# Create the argument parser
+	parser = argparse.ArgumentParser(description='pk - Package Management Utility')
+
+	# Subparsers for different commands
+	subparsers = parser.add_subparsers(title='Commands', dest='command')
+
+	# create_package command
+	create_parser = subparsers.add_parser('create', help='Create a Development Rez Package')
+	create_parser.add_argument('name', type=str, help='Name of the package to create')
+	create_parser.add_argument('version', type=str, help='Version of the package to create')
+	create_parser.add_argument('--repo', default="dev", type=str, help='Repository of the package to create')
+	create_parser.set_defaults(func=create_package)
+
+	# read_package command
+	read_parser = subparsers.add_parser('read', help='Read a package')
+	read_parser.add_argument('name', type=str, help='Name of the package to read')
+	read_parser.set_defaults(func=read_package)
+
+	# upgrade_package command
+	upgrade_parser = subparsers.add_parser('upgrade', help='Upgrade a package')
+	upgrade_parser.add_argument('name', type=str, help='Name of the package to upgrade')
+	upgrade_parser.add_argument('upgrade_type', type=str, help='how to upgrade the package')
+	upgrade_parser.add_argument('--repo', default="dev", type=str, help='Repository of the package to upgrade')
+	upgrade_parser.set_defaults(func=upgrade_package)
+
+	# delete_package command
+	delete_parser = subparsers.add_parser('delete', help='Delete a package')
+	delete_parser.add_argument('name', type=str, help='Name of the package to delete')
+	delete_parser.add_argument('repo', type=str, help='Repository of the package to delete')
+	delete_parser.add_argument('--version', type=str, help='Version of the package to delete')
+	delete_parser.set_defaults(func=delete_package)
+
+	# install_package command
+	install_parser = subparsers.add_parser('install', help='Install a Pip Package')
+	install_parser.add_argument('name', type=str, help='Name of the package to install')
+	install_parser.add_argument('version', type=str, help='Version of the package to install')
+	install_parser.set_defaults(func=install_package)
+
+	# Parse the arguments
+	parsed_args = parser.parse_args()
+	return parsed_args
+
+
+if __name__ == "__main__":
+	args = parse_arguments()
+	# Call the corresponding function based on the provided command
+	if args.command:
+		command_func = args.func
+		command_args = vars(args)
+		del command_args['command']
+		del command_args['func']
+		command_func(**command_args)
+
+
+

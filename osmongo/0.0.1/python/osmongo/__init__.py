@@ -1,0 +1,1 @@
+from .osmongo import MongoAPI

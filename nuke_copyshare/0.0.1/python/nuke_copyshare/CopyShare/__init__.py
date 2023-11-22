@@ -1,0 +1,1 @@
+from .copyshare import CopyShare

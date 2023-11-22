@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+
+from osmongo import MongoAPI
+from bson import ObjectId
+
+mongo = MongoAPI()
+collection = mongo.database["bbx"]
+
+data = {
+    "code": "bbx",
+}
+
+data1 = {
+    "item5": "value5",
+    "item6": "value6",
+    "item7": "value7",
+    "item8": "value8",
+}
+
+data2 = {
+    "item9": "value9",
+    "item10": "value10",
+    "item11": "value11",
+    "item12": "value12",
+}
+
+list_of_data = [
+    data,
+    data1,
+    data2
+]
+
+# doc_id = mongo.insert_one(collection, data)
+# print(doc_id)
+
+# doc_id = mongo.insert_many(collection, list_of_data)
+# print(doc_id)
+
+# all_docs = mongo.find(collection)
+# for doc in all_docs:
+#     print(doc)
+
+# query = {"_id": ObjectId('64bbb2d05356bf8411271a81')}
+# query = {"item1": "value1"}
+# on_doc = mongo.find_one(collection, query)
+# print(on_doc)
+
+# count = mongo.count(collection, {"item1": "value1"})
+# print(count)
+
+# update_query = {"_id": ObjectId('64bbb2d05356bf8411271a81')}
+# update_data = {
+#     "$set": {"item1": "Super Updated Value"},
+#     "$rename": {"item2": "renamed_item"}
+# }
+
+# update_data = {
+#     "$unset": {"renamed_item": ""}
+# }
+
+# up_doc = mongo.update_one(collection, update_query, update_data)
+# print(up_doc)
+
+# replace_query = {"_id": ObjectId('64bbb2d05356bf8411271a81')}
+# replace_data = {"first_name": "Sai Chaitanya", "last_name": "Akula"}
+# replace_doc = mongo.replace_one(collection, replace_query, replace_data)
+# print(replace_doc)
+
+# delete_query = {"_id": ObjectId('64bbb2d05356bf8411271a81')}
+# delete_doc = mongo.delete_one(collection, delete_query)
+# print(delete_doc)
+
+# mongo.update_many()
+# mongo.delete_many()
+
+# print(mongo.find_one(collection, {"code": "bubl"}) is not None)

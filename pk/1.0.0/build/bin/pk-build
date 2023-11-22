@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+from pk import package_build
+import argparse
+
+def parse_arguments():
+	# Create the argument parser
+	parser = argparse.ArgumentParser(description='pkgbuild - Package Build Utility')
+	
+	parser.add_argument('name', type=str, help='Name of the package to build')
+	parser.add_argument('version', type=str, help='Version of the package to build')
+	parser.add_argument('context', type=str, help='Repository of the package to build')
+	
+    # Parse the arguments
+	parsed_args = parser.parse_args()
+	return parsed_args
+
+if __name__ == "__main__":
+	args = parse_arguments()
+	package_build(name=args.name, version=args.version, context=args.context)
